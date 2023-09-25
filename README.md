@@ -1,2 +1,2 @@
 # Chats
-Swift chat application like WhatsApp, Viber Telegram
+Swift chat application like WhatsApp, Viber, Telegram.
