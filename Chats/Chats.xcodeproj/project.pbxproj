@@ -10,7 +10,7 @@
 		7EB842DF335B3641DF7CF071 /* Pods_Chats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7564E34CE939ECD77FA0B8 /* Pods_Chats.framework */; };
 		BD1802AC2AC1CA700071751B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1802AB2AC1CA700071751B /* AppDelegate.swift */; };
 		BD1802AE2AC1CA700071751B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1802AD2AC1CA700071751B /* SceneDelegate.swift */; };
-		BD1802B02AC1CA700071751B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1802AF2AC1CA700071751B /* ViewController.swift */; };
+		BD1802B02AC1CA700071751B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1802AF2AC1CA700071751B /* LoginViewController.swift */; };
 		BD1802B32AC1CA700071751B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD1802B12AC1CA700071751B /* Main.storyboard */; };
 		BD1802B52AC1CA710071751B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1802B42AC1CA710071751B /* Assets.xcassets */; };
 		BD1802B82AC1CA710071751B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD1802B62AC1CA710071751B /* LaunchScreen.storyboard */; };
@@ -22,7 +22,7 @@
 		BD1802A82AC1CA700071751B /* Chats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1802AB2AC1CA700071751B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD1802AD2AC1CA700071751B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD1802AF2AC1CA700071751B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD1802AF2AC1CA700071751B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BD1802B22AC1CA700071751B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD1802B42AC1CA710071751B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD1802B72AC1CA710071751B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			children = (
 				BD1802AB2AC1CA700071751B /* AppDelegate.swift */,
 				BD1802AD2AC1CA700071751B /* SceneDelegate.swift */,
-				BD1802AF2AC1CA700071751B /* ViewController.swift */,
+				BD1802AF2AC1CA700071751B /* LoginViewController.swift */,
 				BD1802B12AC1CA700071751B /* Main.storyboard */,
 				BD1802B42AC1CA710071751B /* Assets.xcassets */,
 				BD1802B62AC1CA710071751B /* LaunchScreen.storyboard */,
@@ -210,7 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD1802B02AC1CA700071751B /* ViewController.swift in Sources */,
+				BD1802B02AC1CA700071751B /* LoginViewController.swift in Sources */,
 				BD1802AC2AC1CA700071751B /* AppDelegate.swift in Sources */,
 				BD1802AE2AC1CA700071751B /* SceneDelegate.swift in Sources */,
 			);
@@ -358,6 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MADC696R32;
@@ -375,6 +376,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Akyl-Mukatay.Chats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -387,6 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MADC696R32;
@@ -404,6 +407,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Akyl-Mukatay.Chats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
