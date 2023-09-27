@@ -12,14 +12,17 @@ class LoginViewController: UIViewController {
     private let headerStack = UIStackView()
     private let profileImage = UIImageView()
     private let textFieldsStack = UIStackView()
-    private let button = UIButton(type: .system)
-    private let registrationButton = UIButton(type: .system)
+    private let textFieldsButtonStack = UIStackView()
+    private let connectButton = UIButton(type: .system)
+    private let signUpButton = UIButton(type: .system)
     
     private let welcomeLabel = UILabel()
     private let nameLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let loginTextField = UITextField()
+    private let emailTextField = UITextField()
     private let passwordTextField = UITextField()
+    private let forgotPasswordButton = UIButton(type: .system)
+    private let resendEmailButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +34,19 @@ class LoginViewController: UIViewController {
     
     func addSubviews() {
         view.addSubview(headerStack)
+        view.addSubview(profileImage)
+        view.addSubview(textFieldsStack)
+        view.addSubview(textFieldsButtonStack)
+        view.addSubview(signUpButton)
+        view.addSubview(connectButton)
+        
         headerStack.addArrangedSubview(welcomeLabel)
         headerStack.addArrangedSubview(nameLabel)
         headerStack.addArrangedSubview(descriptionLabel)
-        
-        view.addSubview(profileImage)
-        view.addSubview(textFieldsStack)
-        view.addSubview(registrationButton)
-        view.addSubview(button)
+        textFieldsStack.addArrangedSubview(emailTextField)
+        textFieldsStack.addArrangedSubview(passwordTextField)
+        textFieldsButtonStack.addArrangedSubview(forgotPasswordButton)
+        textFieldsButtonStack.addArrangedSubview(resendEmailButton)
     }
     
     func setViewConstraints() {
@@ -57,12 +65,17 @@ class LoginViewController: UIViewController {
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
-        registrationButton.snp.makeConstraints { make in
+        textFieldsButtonStack.snp.makeConstraints { make in
+            make.top.equalTo(textFieldsStack.snp.bottom).offset(8)
+            make.left.equalToSuperview().inset(80)
+            make.right.equalToSuperview()
+        }
+        signUpButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(40)
             make.centerX.equalToSuperview()
         }
-        button.snp.makeConstraints { make in
-            make.bottom.equalTo(registrationButton.snp.bottom).inset(60)
+        connectButton.snp.makeConstraints { make in
+            make.bottom.equalTo(signUpButton.snp.bottom).inset(60)
             make.left.right.equalToSuperview().inset(80)
             make.height.equalTo(48)
         }
@@ -86,32 +99,47 @@ class LoginViewController: UIViewController {
         profileImage.layer.cornerRadius = 16
         profileImage.clipsToBounds = true
         
-        textFieldsStack.addArrangedSubview(loginTextField)
-        textFieldsStack.addArrangedSubview(passwordTextField)
         textFieldsStack.axis = .vertical
         textFieldsStack.spacing = 40
         
-        loginTextField.placeholder = "Login"
-        loginTextField.font = UIFont.systemFont(ofSize: 18)
-        addBottomBorder(to: loginTextField)
+        emailTextField.placeholder = "Email"
+        emailTextField.font = UIFont.systemFont(ofSize: 18)
+        addBottomBorder(to: emailTextField)
         
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
         passwordTextField.font = UIFont.systemFont(ofSize: 18)
         addBottomBorder(to: passwordTextField)
         
-        registrationButton.setTitle("Don't have account? Sing up", for: .normal)
-        registrationButton.backgroundColor = .clear
-        registrationButton.addTarget(
-            self, action: #selector(registrationButtonTapped), for: .touchUpInside
+        textFieldsButtonStack.axis = .horizontal
+        textFieldsButtonStack.spacing = 75
+        
+        forgotPasswordButton.setTitle("Forgot password?", for: .normal)
+        forgotPasswordButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        forgotPasswordButton.backgroundColor = .clear
+        forgotPasswordButton.addTarget(
+            self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside
         )
         
-        button.backgroundColor = UIColor.systemGreen
-        button.setTitle("Connect", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        resendEmailButton.setTitle("Resend email", for: .normal)
+        resendEmailButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        resendEmailButton.backgroundColor = .clear
+        resendEmailButton.addTarget(
+            self, action: #selector(resendEmailButtonTapped), for: .touchUpInside
+        )
+        
+        signUpButton.setTitle("Don't have account? Sing up", for: .normal)
+        signUpButton.backgroundColor = .clear
+        signUpButton.addTarget(
+            self, action: #selector(signUpButtonTapped), for: .touchUpInside
+        )
+        
+        connectButton.backgroundColor = UIColor.systemGreen
+        connectButton.setTitle("Connect", for: .normal)
+        connectButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        connectButton.setTitleColor(UIColor.white, for: .normal)
+        connectButton.layer.cornerRadius = 12
+        connectButton.addTarget(self, action: #selector(connectButtonTapped), for: .touchUpInside)
     }
     
     func addBottomBorder(to textField: UITextField) {
@@ -126,11 +154,19 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @objc func buttonTapped() {
+    @objc func connectButtonTapped() {
         print("buttonTapped()")
     }
+    
+    @objc func forgotPasswordButtonTapped() {
+        print("forgotPasswordButtonTapped()")
+    }
+    
+    @objc func resendEmailButtonTapped() {
+        print("resendEmailButtonTapped()")
+    }
 
-    @objc func registrationButtonTapped() {
+    @objc func signUpButtonTapped() {
         print("registrationButtonTapped()")
     }
 }
