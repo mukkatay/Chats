@@ -104,6 +104,7 @@ class LoginViewController: UIViewController {
         
         emailTextField.placeholder = "Email"
         emailTextField.font = UIFont.systemFont(ofSize: 18)
+        emailTextField.addTarget(self, action: #selector(asd(_:)), for: .editingChanged)
         addBottomBorder(to: emailTextField)
         
         passwordTextField.placeholder = "Password"
@@ -168,6 +169,10 @@ class LoginViewController: UIViewController {
 
     @objc func signUpButtonTapped() {
         print("registrationButtonTapped()")
+    }
+    
+    @objc func asd(_ textField: UITextField) {
+        print("asd")
     }
 }
 
