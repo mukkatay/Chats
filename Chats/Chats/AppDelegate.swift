@@ -2,11 +2,10 @@
 //  AppDelegate.swift
 //  Chats
 //
-//  Created by Akyl Mukatay  on 25.09.2023.
+//  Created by Akyl Mukatay  on 25.11.2023.
 //
 
 import UIKit
-import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,8 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        FirebaseApp.configure()
+        // Override point for customization after application launch.
         return true
     }
 

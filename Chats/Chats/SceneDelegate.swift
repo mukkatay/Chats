@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Chats
 //
-//  Created by Akyl Mukatay  on 25.09.2023.
+//  Created by Akyl Mukatay  on 25.11.2023.
 //
 
 import UIKit
