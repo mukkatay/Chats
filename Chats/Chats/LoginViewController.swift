@@ -33,8 +33,11 @@ class LoginViewController: UIViewController {
         addSubviews()
         setViewConstraints()
         stylizeViews()
+        
+        setupTextFieldDelegates()
     }
     
+    //MARK: -- Add subviews
     func addSubviews() {
         view.addSubview(headerStack)
         view.addSubview(profileImage)
@@ -55,6 +58,7 @@ class LoginViewController: UIViewController {
         textFieldsButtonStack.addArrangedSubview(resendEmailButton)
     }
     
+    //MARK: -- Setup constraints
     func setViewConstraints() {
         headerStack.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(80)
@@ -71,13 +75,19 @@ class LoginViewController: UIViewController {
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
+        emailLabel.snp.makeConstraints { make in
+            make.height.equalTo(16)
+        }
         passwordTextFieldStack.snp.makeConstraints { make in
-            make.top.equalTo(emailTextFieldStack.snp.bottom).offset(32)
+            make.top.equalTo(emailTextFieldStack.snp.bottom).offset(24)
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
+        passwordLabel.snp.makeConstraints { make in
+            make.height.equalTo(16)
+        }
         textFieldsButtonStack.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextFieldStack.snp.bottom).offset(8)
+            make.top.equalTo(passwordTextFieldStack.snp.bottom).offset(16)
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
@@ -92,6 +102,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //MARK: -- Setup views
     func stylizeViews() {
         headerStack.axis = .vertical
         headerStack.spacing = 4
@@ -101,6 +112,7 @@ class LoginViewController: UIViewController {
         
         nameLabel.text = "Chats"
         nameLabel.font = UIFont.systemFont(ofSize: 46, weight: .bold)
+        nameLabel.textColor = .purple
         
         descriptionLabel.text = "Enter the following details and get connected..."
         descriptionLabel.numberOfLines = 0
@@ -112,21 +124,14 @@ class LoginViewController: UIViewController {
         
         emailTextFieldStack.axis = .vertical
         emailTextFieldStack.spacing = 8
-        
-        emailLabel.text = "Email"
         emailLabel.font = UIFont.systemFont(ofSize: 16)
-        
         emailTextField.placeholder = "Email"
         emailTextField.font = UIFont.systemFont(ofSize: 18)
-        emailTextField.addTarget(self, action: #selector(asd(_:)), for: .editingChanged)
         addBottomBorder(to: emailTextField)
         
         passwordTextFieldStack.axis = .vertical
         passwordTextFieldStack.spacing = 8
-        
-        passwordLabel.text = "Password"
         passwordLabel.font = UIFont.systemFont(ofSize: 16)
-        
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
         passwordTextField.font = UIFont.systemFont(ofSize: 18)
@@ -163,18 +168,7 @@ class LoginViewController: UIViewController {
         connectButton.addTarget(self, action: #selector(connectButtonTapped), for: .touchUpInside)
     }
     
-    func addBottomBorder(to textField: UITextField) {
-        let lineView = UIView()
-        lineView.backgroundColor = UIColor.lightGray
-        textField.addSubview(lineView)
-        
-        lineView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(8)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
-        }
-    }
-    
+    //MARK: -- Setup button actions
     @objc func connectButtonTapped() {
         print("buttonTapped()")
     }
@@ -191,8 +185,37 @@ class LoginViewController: UIViewController {
         print("registrationButtonTapped()")
     }
     
-    @objc func asd(_ textField: UITextField) {
-        print("asd")
+    //MARK: -- Setup
+    private func setupTextFieldDelegates() {
+        emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        updatePlaceholderLabels(textField: textField)
+    }
+    
+    private func addBottomBorder(to textField: UITextField) {
+        let lineView = UIView()
+        lineView.backgroundColor = UIColor.lightGray
+        textField.addSubview(lineView)
+        
+        lineView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(8)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(1)
+        }
+    }
+    //MARK: -- Animations
+    private func updatePlaceholderLabels(textField: UITextField) {
+        switch textField {
+        case emailTextField:
+            emailLabel.text = textField.hasText ? "Email" : ""
+        case passwordTextField:
+            passwordLabel.text = textField.hasText ? "Password" : ""
+        default:
+            break
+        }
     }
 }
 
