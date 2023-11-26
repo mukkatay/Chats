@@ -11,7 +11,8 @@ import SnapKit
 class LoginViewController: UIViewController {
     private let headerStack = UIStackView()
     private let profileImage = UIImageView()
-    private let textFieldsStack = UIStackView()
+    private let emailTextFieldStack = UIStackView()
+    private let passwordTextFieldStack = UIStackView()
     private let textFieldsButtonStack = UIStackView()
     private let connectButton = UIButton(type: .system)
     private let signUpButton = UIButton(type: .system)
@@ -19,7 +20,9 @@ class LoginViewController: UIViewController {
     private let welcomeLabel = UILabel()
     private let nameLabel = UILabel()
     private let descriptionLabel = UILabel()
+    private let emailLabel = UILabel()
     private let emailTextField = UITextField()
+    private let passwordLabel = UILabel()
     private let passwordTextField = UITextField()
     private let forgotPasswordButton = UIButton(type: .system)
     private let resendEmailButton = UIButton(type: .system)
@@ -35,7 +38,8 @@ class LoginViewController: UIViewController {
     func addSubviews() {
         view.addSubview(headerStack)
         view.addSubview(profileImage)
-        view.addSubview(textFieldsStack)
+        view.addSubview(emailTextFieldStack)
+        view.addSubview(passwordTextFieldStack)
         view.addSubview(textFieldsButtonStack)
         view.addSubview(signUpButton)
         view.addSubview(connectButton)
@@ -43,8 +47,10 @@ class LoginViewController: UIViewController {
         headerStack.addArrangedSubview(welcomeLabel)
         headerStack.addArrangedSubview(nameLabel)
         headerStack.addArrangedSubview(descriptionLabel)
-        textFieldsStack.addArrangedSubview(emailTextField)
-        textFieldsStack.addArrangedSubview(passwordTextField)
+        emailTextFieldStack.addArrangedSubview(emailLabel)
+        emailTextFieldStack.addArrangedSubview(emailTextField)
+        passwordTextFieldStack.addArrangedSubview(passwordLabel)
+        passwordTextFieldStack.addArrangedSubview(passwordTextField)
         textFieldsButtonStack.addArrangedSubview(forgotPasswordButton)
         textFieldsButtonStack.addArrangedSubview(resendEmailButton)
     }
@@ -60,13 +66,18 @@ class LoginViewController: UIViewController {
             make.left.equalToSuperview().inset(80)
             make.width.height.equalTo(90)
         }
-        textFieldsStack.snp.makeConstraints { make in
+        emailTextFieldStack.snp.makeConstraints { make in
             make.top.equalTo(profileImage.snp.bottom).offset(32)
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
+        passwordTextFieldStack.snp.makeConstraints { make in
+            make.top.equalTo(emailTextFieldStack.snp.bottom).offset(32)
+            make.left.equalToSuperview().inset(80)
+            make.right.equalToSuperview()
+        }
         textFieldsButtonStack.snp.makeConstraints { make in
-            make.top.equalTo(textFieldsStack.snp.bottom).offset(8)
+            make.top.equalTo(passwordTextFieldStack.snp.bottom).offset(8)
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
@@ -99,13 +110,22 @@ class LoginViewController: UIViewController {
         profileImage.layer.cornerRadius = 16
         profileImage.clipsToBounds = true
         
-        textFieldsStack.axis = .vertical
-        textFieldsStack.spacing = 40
+        emailTextFieldStack.axis = .vertical
+        emailTextFieldStack.spacing = 8
+        
+        emailLabel.text = "Email"
+        emailLabel.font = UIFont.systemFont(ofSize: 16)
         
         emailTextField.placeholder = "Email"
         emailTextField.font = UIFont.systemFont(ofSize: 18)
         emailTextField.addTarget(self, action: #selector(asd(_:)), for: .editingChanged)
         addBottomBorder(to: emailTextField)
+        
+        passwordTextFieldStack.axis = .vertical
+        passwordTextFieldStack.spacing = 8
+        
+        passwordLabel.text = "Password"
+        passwordLabel.font = UIFont.systemFont(ofSize: 16)
         
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true
