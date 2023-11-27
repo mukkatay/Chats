@@ -29,6 +29,8 @@ class LoginViewController: UIViewController {
     private let repeatPasswordTextField = UITextField()
     private let forgotPasswordButton = UIButton(type: .system)
     private let resendEmailButton = UIButton(type: .system)
+    
+    var isLogin = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,7 @@ class LoginViewController: UIViewController {
         setViewConstraints()
         stylizeViews()
         
+        updateUIFor(login: isLogin)
         setupTextFieldDelegates()
     }
     
@@ -179,7 +182,7 @@ class LoginViewController: UIViewController {
         signUpButton.setTitle("Don't have account? Sing up", for: .normal)
         signUpButton.backgroundColor = .clear
         signUpButton.addTarget(
-            self, action: #selector(signUpButtonTapped), for: .touchUpInside
+            self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside
         )
         
         connectButton.backgroundColor = UIColor.systemGreen
@@ -203,8 +206,9 @@ class LoginViewController: UIViewController {
         print("resendEmailButtonTapped()")
     }
 
-    @objc func signUpButtonTapped() {
-        print("registrationButtonTapped()")
+    @objc func signUpButtonTapped(_ sender : UIButton) {
+        updateUIFor(login: sender.titleLabel?.text == "Have an account? Log in")
+        isLogin.toggle()
     }
     
     //MARK: -- Setup
@@ -230,6 +234,16 @@ class LoginViewController: UIViewController {
         }
     }
     //MARK: -- Animations
+    private func updateUIFor(login: Bool) {
+        connectButton.setTitle(login ? "Connect" : "Register", for: .normal)
+        signUpButton.setTitle(login ? "Don't have account? Sing up" : "Have an account? Log in", for: .normal)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.repeatPasswordTextField.isHidden = login
+            self.repeatPasswordLabel.isHidden = login
+        }
+    }
+    
     private func updatePlaceholderLabels(textField: UITextField) {
         switch textField {
         case emailTextField:
