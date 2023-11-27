@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     private let profileImage = UIImageView()
     private let emailTextFieldStack = UIStackView()
     private let passwordTextFieldStack = UIStackView()
+    private let repeatPasswordTextFieldStack = UIStackView()
     private let textFieldsButtonStack = UIStackView()
     private let connectButton = UIButton(type: .system)
     private let signUpButton = UIButton(type: .system)
@@ -24,6 +25,8 @@ class LoginViewController: UIViewController {
     private let emailTextField = UITextField()
     private let passwordLabel = UILabel()
     private let passwordTextField = UITextField()
+    private let repeatPasswordLabel = UILabel()
+    private let repeatPasswordTextField = UITextField()
     private let forgotPasswordButton = UIButton(type: .system)
     private let resendEmailButton = UIButton(type: .system)
 
@@ -43,6 +46,7 @@ class LoginViewController: UIViewController {
         view.addSubview(profileImage)
         view.addSubview(emailTextFieldStack)
         view.addSubview(passwordTextFieldStack)
+        view.addSubview(repeatPasswordTextFieldStack)
         view.addSubview(textFieldsButtonStack)
         view.addSubview(signUpButton)
         view.addSubview(connectButton)
@@ -54,6 +58,8 @@ class LoginViewController: UIViewController {
         emailTextFieldStack.addArrangedSubview(emailTextField)
         passwordTextFieldStack.addArrangedSubview(passwordLabel)
         passwordTextFieldStack.addArrangedSubview(passwordTextField)
+        repeatPasswordTextFieldStack.addArrangedSubview(repeatPasswordLabel)
+        repeatPasswordTextFieldStack.addArrangedSubview(repeatPasswordTextField)
         textFieldsButtonStack.addArrangedSubview(forgotPasswordButton)
         textFieldsButtonStack.addArrangedSubview(resendEmailButton)
     }
@@ -86,8 +92,16 @@ class LoginViewController: UIViewController {
         passwordLabel.snp.makeConstraints { make in
             make.height.equalTo(16)
         }
+        repeatPasswordTextFieldStack.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextFieldStack.snp.bottom).offset(24)
+            make.left.equalToSuperview().inset(80)
+            make.right.equalToSuperview()
+        }
+        repeatPasswordLabel.snp.makeConstraints { make in
+            make.height.equalTo(16)
+        }
         textFieldsButtonStack.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextFieldStack.snp.bottom).offset(16)
+            make.top.equalTo(repeatPasswordTextFieldStack.snp.bottom).offset(16)
             make.left.equalToSuperview().inset(80)
             make.right.equalToSuperview()
         }
@@ -136,6 +150,14 @@ class LoginViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         passwordTextField.font = UIFont.systemFont(ofSize: 18)
         addBottomBorder(to: passwordTextField)
+        
+        repeatPasswordTextFieldStack.axis = .vertical
+        repeatPasswordTextFieldStack.spacing = 8
+        repeatPasswordLabel.font = UIFont.systemFont(ofSize: 16)
+        repeatPasswordTextField.placeholder = "Repeat password"
+        repeatPasswordTextField.isSecureTextEntry = true
+        repeatPasswordTextField.font = UIFont.systemFont(ofSize: 18)
+        addBottomBorder(to: repeatPasswordTextField)
         
         textFieldsButtonStack.axis = .horizontal
         textFieldsButtonStack.spacing = 75
@@ -189,6 +211,7 @@ class LoginViewController: UIViewController {
     private func setupTextFieldDelegates() {
         emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        repeatPasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -213,6 +236,8 @@ class LoginViewController: UIViewController {
             emailLabel.text = textField.hasText ? "Email" : ""
         case passwordTextField:
             passwordLabel.text = textField.hasText ? "Password" : ""
+        case repeatPasswordTextField:
+            repeatPasswordLabel.text = textField.hasText ? "Repeat password" : ""
         default:
             break
         }
