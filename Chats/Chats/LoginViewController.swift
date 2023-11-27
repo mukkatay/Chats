@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
         
         updateUIFor(login: isLogin)
         setupTextFieldDelegates()
+        setupBackgroundTap()
     }
     
     //MARK: -- Add subviews
@@ -220,6 +221,15 @@ class LoginViewController: UIViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         updatePlaceholderLabels(textField: textField)
+    }
+    
+    private func setupBackgroundTap() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func backgroundTap() {
+        view.endEditing(false)
     }
     
     private func addBottomBorder(to textField: UITextField) {
