@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import ProgressHUD
 
 class LoginViewController: UIViewController {
     private let headerStack = UIStackView()
@@ -170,14 +171,14 @@ class LoginViewController: UIViewController {
         forgotPasswordButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         forgotPasswordButton.backgroundColor = .clear
         forgotPasswordButton.addTarget(
-            self, action: #selector(forgotPasswordButtonTapped), for: .touchUpInside
+            self, action: #selector(forgotPasswordButtonTapped(_:)), for: .touchUpInside
         )
         
         resendEmailButton.setTitle("Resend email", for: .normal)
         resendEmailButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         resendEmailButton.backgroundColor = .clear
         resendEmailButton.addTarget(
-            self, action: #selector(resendEmailButtonTapped), for: .touchUpInside
+            self, action: #selector(resendEmailButtonTapped(_:)), for: .touchUpInside
         )
         
         signUpButton.setTitle("Don't have account? Sing up", for: .normal)
@@ -191,20 +192,35 @@ class LoginViewController: UIViewController {
         connectButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         connectButton.setTitleColor(UIColor.white, for: .normal)
         connectButton.layer.cornerRadius = 12
-        connectButton.addTarget(self, action: #selector(connectButtonTapped), for: .touchUpInside)
+        connectButton.addTarget(self, action: #selector(connectButtonTapped(_:)), for: .touchUpInside)
     }
     
     //MARK: -- Setup button actions
-    @objc func connectButtonTapped() {
-        print("buttonTapped()")
+    @objc func connectButtonTapped(_ sender: Any) {
+        if isDataInputedFor(type: isLogin ? "Connect" : "Register") {
+           //login or register
+            print("have data for login/register")
+        } else {
+            ProgressHUD.failed("All Fields are required")
+        }
     }
     
-    @objc func forgotPasswordButtonTapped() {
-        print("forgotPasswordButtonTapped()")
+    @objc func forgotPasswordButtonTapped(_ sender: Any) {
+        if isDataInputedFor(type: "Password") {
+           //reset password
+            print("have data for forgot password")
+        } else {
+            ProgressHUD.failed("Email is required")
+        }
     }
     
-    @objc func resendEmailButtonTapped() {
-        print("resendEmailButtonTapped()")
+    @objc func resendEmailButtonTapped(_ sender: Any) {
+        if isDataInputedFor(type: "Password") {
+            //resend varification Email
+            print("have data for resend email")
+        } else {
+            ProgressHUD.failed("Email is required")
+        }
     }
 
     @objc func signUpButtonTapped(_ sender : UIButton) {
@@ -264,6 +280,18 @@ class LoginViewController: UIViewController {
             repeatPasswordLabel.text = textField.hasText ? "Repeat password" : ""
         default:
             break
+        }
+    }
+    
+    //MARK: -- Helpers
+    private func isDataInputedFor(type: String) -> Bool {
+        switch type {
+        case "Connect":
+            return emailTextField.text != "" && passwordTextField.text != ""
+        case "Register":
+            return emailTextField.text != "" && passwordTextField.text != "" && repeatPasswordTextField.text != ""
+        default:
+            return emailTextField.text != ""
         }
     }
 }
